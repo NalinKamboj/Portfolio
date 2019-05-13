@@ -9,6 +9,7 @@
   "author": "Nalin Kamboj",
   "license": "ISC",
   "dependencies": {
+    "node-gyp": "^4.0.0",
     "node-sass": "^4.11.0"
   }
 }
