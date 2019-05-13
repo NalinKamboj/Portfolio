@@ -1,9 +1,15 @@
 //WIDESCREEN
 @include mediaXL {
+  .projects {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 //DESKTOPS AND LAPTOPS
 @include mediaLg {
+  .projects {
+    grid-template-columns: repeate(3, 1fr);
+  }
 }
 
 //Tablets and tiny laptops
@@ -53,11 +59,18 @@
       "project3";
     grid-template-columns: 1fr;
   }
+
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 //Phones
 @include mediaSm {
   main#home h1 {
     margin-top: 10vh;
+  }
+  .projects {
+    grid-template-columns: 1fr;
   }
 }

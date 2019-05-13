@@ -99,15 +99,6 @@ main {
   border-bottom: $secondary-color 5px solid;
 }
 
-#main-footer {
-  text-align: center;
-  padding: 1rem;
-  background: darken($primary-color, 10);
-  color: setTextColor($primary-color);
-  height: 50px;
-  border-bottom: $secondary-color 1px solid;
-}
-
 .project-1 {
   grid-area: project1;
 }
@@ -118,6 +109,58 @@ main {
 
 .project-3 {
   grid-area: project3;
+}
+
+//WORK PAGE
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  img {
+    width: 200px;
+    height: 200px;
+    border: 3px #fff solid;
+    &:hover {
+      opacity: 0.6;
+      border-color: $secondary-color;
+      @include easeOut;
+    }
+  }
+}
+
+//Button Styles   (BOOTSTRAP DOES IT IN DIFF SCSS FILES !)
+.btn {
+  display: block;
+  padding: 0.5rem 1rem;
+  border: 0;
+  margin-bottom: 0.3rem;
+  &:hover {
+    background: $secondary-color;
+    color: setTextColor($secondary-color);
+    @include easeOut;
+  }
+}
+
+.btn-dark {
+  @extend .btn; //Extending default button style...
+  background: darken($primary-color, 50);
+  color: setTextColor($primary-color);
+}
+
+.btn-light {
+  @extend .btn;
+  background: lighten($primary-color, 20);
+  color: setTextColor($primary-color);
+}
+
+#main-footer {
+  text-align: center;
+  padding: 1rem;
+  background: darken($primary-color, 10);
+  color: setTextColor($primary-color);
+  height: 50px;
+  border-bottom: $secondary-color 1px solid;
 }
 
 @import "mobile";
