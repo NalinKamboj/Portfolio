@@ -4,7 +4,7 @@
   "description": "Portfolio for GH Pages",
   "main": "index.js",
   "scripts": {
-    "sasstest": "node-sass -w scss/ -o dist/css/ --recursive"
+    "sasstest": "node-sass -w scss/ -o dist/css --recursive"
   },
   "author": "Nalin Kamboj",
   "license": "ISC",
