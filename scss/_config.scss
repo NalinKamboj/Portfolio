@@ -1,4 +1,5 @@
 $primary-color: #444;
+$primary-light: lighten($primary-color, 17);
 $secondary-color: #eece1a;
 $show-home-image: true;
 $home-image: url(../assets/home_image.jpg);

@@ -248,6 +248,45 @@ main {
   height: 50px;
   border-bottom: #eece1a 1px solid; }
 
+.card-loader {
+  background-color: #515151;
+  padding: 10px;
+  position: relative;
+  border-radius: 7px;
+  margin-bottom: 0;
+  height: 200px;
+  overflow: hidden; }
+  .card-loader:only-child {
+    margin-top: 0; }
+  .card-loader:before {
+    content: "";
+    height: 110px;
+    display: block;
+    background-color: #6f6f6f;
+    box-shadow: -48px 78px 0 -48px #6f6f6f, -51px 102px 0 -51px #6f6f6f; }
+  .card-loader:after {
+    content: "";
+    background-color: #333;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: loader-animate;
+    animation-timing-function: linear;
+    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0) 81%);
+    background: -o-linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0) 81%);
+    background: linear-gradient(to left, rgba(238, 206, 26, 0) 0%, rgba(238, 206, 26, 0.4) 30%, rgba(238, 206, 26, 0) 80%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); }
+
+@keyframes loader-animate {
+  0% {
+    transform: translate3d(-100%, 0, 0); }
+  100% {
+    transform: translate3d(100%, 0, 0); } }
+
 @media screen and (min-width: 1171px) {
   .projects {
     grid-template-columns: repeat(4, 1fr); } }
