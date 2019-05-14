@@ -1,14 +1,30 @@
 function getGithubPage(url) {}
-
+var debugMode = true;
 loadPage("GET", "https://github.com/NalinKamboj?tab=repositories", true)
   .then(function(response) {
-    console.log("REQUEST COMPLETE!");
-    // var name = JSON.parse(response);
-    console.log(response);
+    if (debugMode) {
+      console.log("GH PAGE RECEIVED");
+    }
+    ghDoc = new DOMParser().parseFromString(response, "text/html");
+    if (debugMode) {
+      console.log(ghDoc);
+    }
+
+    return ghDoc;
+  })
+  .then(function(doc) {
+    addItems(doc);
   })
   .catch(function(err) {
     console.error("Some error occurred.", err.statusText);
   });
+
+function addItems(doc) {
+  const repoList = doc.getElementById("user-repositories-list");
+  console.log(repoList);
+
+  //ADD CODE HERE....
+}
 
 function loadPage(method, url, useproxy = false) {
   return new Promise(function(resolve, reject) {
