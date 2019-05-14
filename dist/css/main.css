@@ -177,7 +177,8 @@ main {
 .project {
   background: #515151;
   padding: 0.5rem;
-  border-bottom: #eece1a 5px solid; }
+  border-bottom: #eece1a 5px solid;
+  border-radius: 7px; }
 
 .project-1 {
   grid-area: project1; }
