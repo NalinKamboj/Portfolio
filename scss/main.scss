@@ -96,7 +96,7 @@ main {
 .project {
   background: lighten($primary-color, 5);
   padding: 0.5rem;
-  border-bottom: $secondary-color 5px solid;
+  border-bottom: $secondary-color 3px solid;
   border-radius: 7px;
 }
 
@@ -121,12 +121,20 @@ main {
   img {
     width: 200px;
     height: 200px;
-    border: 3px #fff solid;
+    border: 2px $secondary-color solid;
+    // align-self: center;
     &:hover {
       opacity: 0.6;
       border-color: $secondary-color;
       @include easeOut;
     }
+  }
+  // background: $primary-light;
+  .item {
+    background: lighten($primary-color, 5);
+    padding: 5px;
+    border-radius: 7px;
+    border-bottom: $secondary-color 3px solid;
   }
 }
 
@@ -145,13 +153,18 @@ main {
 
 .btn-dark {
   @extend .btn; //Extending default button style...
-  background: darken($primary-color, 50);
+  background: #0366d6;
   color: setTextColor($primary-color);
+  // padding: 0.5rem 0;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
 
 .btn-light {
   @extend .btn;
   background: lighten($primary-color, 20);
+  // padding: 0.5rem 0rem;
+  margin-bottom: 0.1rem;
   color: setTextColor($primary-color);
 }
 
@@ -231,15 +244,15 @@ main {
     animation-timing-function: linear;
     background: -webkit-linear-gradient(
       right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.6) 30%,
-      rgba(255, 255, 255, 0) 81%
+      rgba($secondary-color, 0) 0%,
+      rgba($secondary-color, 0.4) 30%,
+      rgba($secondary-color, 0) 80%
     );
     background: -o-linear-gradient(
       right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.6) 30%,
-      rgba(255, 255, 255, 0) 81%
+      rgba($secondary-color, 0) 0%,
+      rgba($secondary-color, 0.4) 30%,
+      rgba($secondary-color, 0) 80%
     );
     background: linear-gradient(
       to left,

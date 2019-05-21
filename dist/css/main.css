@@ -177,7 +177,7 @@ main {
 .project {
   background: #515151;
   padding: 0.5rem;
-  border-bottom: #eece1a 5px solid;
+  border-bottom: #eece1a 3px solid;
   border-radius: 7px; }
 
 .project-1 {
@@ -196,11 +196,16 @@ main {
   .projects img {
     width: 200px;
     height: 200px;
-    border: 3px #fff solid; }
+    border: 2px #eece1a solid; }
     .projects img:hover {
       opacity: 0.6;
       border-color: #eece1a;
       transition: all 0.6s ease-out; }
+  .projects .item {
+    background: #515151;
+    padding: 5px;
+    border-radius: 7px;
+    border-bottom: #eece1a 3px solid; }
 
 .btn, .btn-dark, .btn-light {
   display: block;
@@ -213,11 +218,14 @@ main {
     transition: all 0.6s ease-out; }
 
 .btn-dark {
-  background: black;
-  color: #fff; }
+  background: #0366d6;
+  color: #fff;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px; }
 
 .btn-light {
   background: #777777;
+  margin-bottom: 0.1rem;
   color: #fff; }
 
 .boxes {
@@ -277,8 +285,8 @@ main {
     animation-iteration-count: infinite;
     animation-name: loader-animate;
     animation-timing-function: linear;
-    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0) 81%);
-    background: -o-linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0) 81%);
+    background: -webkit-linear-gradient(right, rgba(238, 206, 26, 0) 0%, rgba(238, 206, 26, 0.4) 30%, rgba(238, 206, 26, 0) 80%);
+    background: -o-linear-gradient(right, rgba(238, 206, 26, 0) 0%, rgba(238, 206, 26, 0.4) 30%, rgba(238, 206, 26, 0) 80%);
     background: linear-gradient(to left, rgba(238, 206, 26, 0) 0%, rgba(238, 206, 26, 0.4) 30%, rgba(238, 206, 26, 0) 80%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); }
 
