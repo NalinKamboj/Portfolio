@@ -31,11 +31,16 @@ function getRepoDetails(doc) {
 
   //Get repository names
   var repoNameList = [];
+  var repoLinkList = [];
+
   for (let item of repos.getElementsByTagName("h3")) {
     if (debugMode) {
       console.log("[INFO] Repo Name - " + item.textContent.trim());
     }
     repoNameList.push(item.textContent.trim());
+    var linkItem = item.getElementsByTagName("a")[0];
+    console.log("[INFO] Repo URL - " + linkItem.href);
+    repoLinkList.push(linkItem.href);
   }
 
   //Get repository descriptions
@@ -48,13 +53,14 @@ function getRepoDetails(doc) {
     repoDescList.push(item.textContent.trim());
   }
   // Get repository URLs
-  var repoLinkList = [];
-  for (let item of repos.getElementsByTagName("a")) {
-    if (debugMode) {
-      console.log("[INFO] Repo URL - " + item.href);
-    }
-    repoLinkList.push(item.href);
-  }
+  // console.log("[INFO] REPOS - ");
+  // console.log(repos);
+  // for (let item of repos.getElementsByTagName("a")) {
+  //   if (debugMode) {
+  //     console.log("[INFO] Repo URL - " + item.href);
+  //   }
+  //   repoLinkList.push(item.href);
+  // }
 
   return {
     names: repoNameList,
