@@ -88,8 +88,22 @@ function addRepos(data) {
     projectDesc = document.createElement("p");
     projectDesc.textContent = data[index].description; //Might cause an error. TODO Improve this ASAP!
 
+    // <a href="#" class="btn-dark">
+    // <i class="fab fa-github"></i> Github
+    // </a>
+    projectLink = document.createElement("a");
+    projectLink.setAttribute("class", "btn-dark");
+    projectLink.setAttribute("href", data[index].link);
+
+    githubIcon = document.createElement("i");
+    githubIcon.setAttribute("class", "fab fa-github");
+    projectLink.appendChild(githubIcon);
+    // projectLink.textContent = "Github";
+
     projectItem.appendChild(projectHeading);
     projectItem.appendChild(projectDesc);
+    projectItem.appendChild(projectLink);
+
     projects.appendChild(projectItem);
   }
 }
