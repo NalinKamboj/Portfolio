@@ -13,7 +13,8 @@ loadPage("GET", "js/repos.html", false) //Real link - https://github.com/NalinKa
     return ghDoc;
   })
   .then(function(doc) {
-    getRepoDetails(doc);
+    var repoDetails = getRepoDetails(doc);
+    return repoDetails;
   })
   .then(function(data) {
     addRepos(data);
@@ -24,6 +25,7 @@ loadPage("GET", "js/repos.html", false) //Real link - https://github.com/NalinKa
 
 function getRepoDetails(doc) {
   const repos = doc.getElementById("user-repositories-list");
+  var projectDiv = document.getElementsByClassName("projects")[0];
   if (debugMode) {
     console.log("[INFO] Repositories list - ");
     console.log(repos);
@@ -41,6 +43,11 @@ function getRepoDetails(doc) {
     var linkItem = item.getElementsByTagName("a")[0];
     console.log("[INFO] Repo URL - " + linkItem.href);
     repoLinkList.push(linkItem.href);
+
+    //Card loader placeholder element
+    // loader = document.createElement("div");
+    // loader.setAttribute("class", "project card-loader");
+    // projectDiv.appendChild(loader);
   }
 
   //Get repository descriptions
@@ -70,7 +77,31 @@ function getRepoDetails(doc) {
 }
 
 //Function for adding GH data to the actual portfolio page
-function addRepos(data) {}
+function addRepos(data) {
+  if (debugMode) {
+    console.log("[INFO] Inside addRepos()");
+    console.log(data);
+    // console.log(data.descriptions);
+  }
+
+  var projects = document.getElementsByClassName("projects")[0];
+
+  for (let index = 0; index < data.names.length; index++) {
+    projectItem = document.createElement("div");
+    projectItem.setAttribute("class", "item");
+
+    projectHeading = document.createElement("h3");
+    // projectHeading.setAttribute("class", "text-secondary");
+    projectHeading.textContent = data.names[index];
+
+    projectDesc = document.createElement("p");
+    projectDesc.textContent = data.descriptions[index]; //Might cause an error. TODO Improve this ASAP!
+
+    projectItem.appendChild(projectHeading);
+    projectItem.appendChild(projectDesc);
+    projects.appendChild(projectItem);
+  }
+}
 
 // AJAX HTTP Page loader
 function loadPage(method, url, useproxy = false) {
