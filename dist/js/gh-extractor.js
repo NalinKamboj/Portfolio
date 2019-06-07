@@ -25,24 +25,22 @@ loadPage("GET", "js/repos.html", false) //Real link - https://github.com/NalinKa
 
 function getRepoDetails(doc) {
   const repos = doc.getElementById("user-repositories-list");
+  var repoInfo = [];
   var projectDiv = document.getElementsByClassName("projects")[0];
   if (debugMode) {
     console.log("[INFO] Repositories list - ");
     console.log(repos);
   }
 
-  //Get repository names
-  var repoNameList = [];
-  var repoLinkList = [];
-
   for (let item of repos.getElementsByTagName("h3")) {
-    if (debugMode) {
-      console.log("[INFO] Repo Name - " + item.textContent.trim());
-    }
-    repoNameList.push(item.textContent.trim());
+    // repoNameList.push(item.textContent.trim());
     var linkItem = item.getElementsByTagName("a")[0];
-    console.log("[INFO] Repo URL - " + linkItem.href);
-    repoLinkList.push(linkItem.href);
+    // console.log("[INFO] Repo URL - " + linkItem.href);
+    // repoLinkList.push(linkItem.href);
+    var info = {};
+    info["link"] = linkItem.href;
+    info["name"] = item.textContent.trim(); //TODO Format result
+    repoInfo.push(info);
 
     //Card loader placeholder element
     // loader = document.createElement("div");
@@ -50,52 +48,45 @@ function getRepoDetails(doc) {
     // projectDiv.appendChild(loader);
   }
 
+  if (debugMode) {
+    console.log("[INFO] Repo Info");
+    console.log(repoInfo);
+  }
+
   //Get repository descriptions
   var repoDescList = [];
-  for (let item of repos.getElementsByTagName("p")) {
-    if (debugMode) {
-      console.log("[INFO] Repo Desc - " + item.textContent.trim());
-      // console.log(item.textContent);
-    }
-    repoDescList.push(item.textContent.trim());
+  var details = repos.getElementsByTagName("p");
+  for (let index = 0; index < details.length; index++) {
+    const desc = details[index];
+    repoInfo[index].description = details[index].textContent.trim();
   }
-  // Get repository URLs
-  // console.log("[INFO] REPOS - ");
-  // console.log(repos);
-  // for (let item of repos.getElementsByTagName("a")) {
-  //   if (debugMode) {
-  //     console.log("[INFO] Repo URL - " + item.href);
-  //   }
-  //   repoLinkList.push(item.href);
-  // }
 
-  return {
-    names: repoNameList,
-    descriptions: repoDescList,
-    links: repoLinkList
-  };
+  if (debugMode) {
+    console.log("[INFO] Final REPO INFO");
+    console.log(repoInfo);
+  }
+
+  return repoInfo;
 }
 
 //Function for adding GH data to the actual portfolio page
 function addRepos(data) {
   if (debugMode) {
     console.log("[INFO] Inside addRepos()");
-    console.log(data);
-    // console.log(data.descriptions);
   }
 
   var projects = document.getElementsByClassName("projects")[0];
 
-  for (let index = 0; index < data.names.length; index++) {
+  for (let index = 0; index < data.length; index++) {
     projectItem = document.createElement("div");
     projectItem.setAttribute("class", "item");
 
     projectHeading = document.createElement("h3");
     // projectHeading.setAttribute("class", "text-secondary");
-    projectHeading.textContent = data.names[index];
+    projectHeading.textContent = data[index].name;
 
     projectDesc = document.createElement("p");
-    projectDesc.textContent = data.descriptions[index]; //Might cause an error. TODO Improve this ASAP!
+    projectDesc.textContent = data[index].description; //Might cause an error. TODO Improve this ASAP!
 
     projectItem.appendChild(projectHeading);
     projectItem.appendChild(projectDesc);
