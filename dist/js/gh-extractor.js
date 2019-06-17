@@ -92,7 +92,7 @@ function addRepos(data) {
     // <i class="fab fa-github"></i> Github
     // </a>
     projectLink = document.createElement("a");
-    projectLink.setAttribute("class", "btn-dark");
+    projectLink.setAttribute("class", "btn-dark mid");
     projectLink.setAttribute("href", data[index].link);
 
     githubIcon = document.createElement("i");

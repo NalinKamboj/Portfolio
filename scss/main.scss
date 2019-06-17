@@ -156,8 +156,18 @@ main {
   background: #0366d6;
   color: setTextColor($primary-color);
   // padding: 0.5rem 0;
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
+
+  &.bottom {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+
+  &.top {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  //Use "top bottom" for middle level button. TODO - Improve this.
 }
 
 .btn-light {
@@ -166,6 +176,18 @@ main {
   // padding: 0.5rem 0rem;
   margin-bottom: 0.1rem;
   color: setTextColor($primary-color);
+
+  &.bottom {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+
+  &.top {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  //Use "top bottom" for middle level button. TODO - Improve this.
 }
 
 // Contact pages
