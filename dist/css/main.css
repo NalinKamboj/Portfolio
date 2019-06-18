@@ -192,8 +192,8 @@ main {
 .projects {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-  grid-auto-rows: 200px; }
+  grid-gap: 15px;
+  grid-auto-rows: 3px; }
   .projects .item {
     background: #515151;
     padding: 7px;

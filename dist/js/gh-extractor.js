@@ -141,12 +141,13 @@ function resizeGrid(item) {
 
   if (debugMode) {
     console.log("[INFO] Resizer - ");
+    console.log(item);
     console.log("\tRow Height - " + rowHeight + ", Gap - " + rowGap);
   }
-  console.log("\tReal Height - " + item.getBoundingClientRect().height);
-  rowSpan = Math.ceil(
-    (item.getBoundingClientRect().height + rowGap) / (rowHeight + rowGap)
-  );
+  console.log("\tReal Height - " + item.scrollHeight);
+  var value = (item.scrollHeight + rowGap + 2) / (rowHeight + rowGap);
+  console.log("\t FLOAT VAL - " + value);
+  rowSpan = Math.ceil(value);
 
   if (debugMode) {
     console.log("\tRow Span - " + rowSpan);
@@ -157,10 +158,6 @@ function resizeGrid(item) {
 //TODO Extend this function and make it portable
 function resizeAllGridItems() {
   allItems = document.getElementsByClassName("item");
-  if (debugMode) {
-    console.log("[INFO] Grid Items - ");
-    console.log(allItems);
-  }
   for (x = 0; x < allItems.length; x++) {
     resizeGrid(allItems[x]);
   }

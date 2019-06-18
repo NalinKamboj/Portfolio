@@ -118,8 +118,8 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   // grid-template-columns: repeat(auto-fill, minmax(250px,1fr));     //Cool way of doing the above as well!
-  grid-gap: 20px;
-  grid-auto-rows: 200px;
+  grid-gap: 15px;
+  grid-auto-rows: 3px;
   // Image styling not needed (for now)
   // img {
   //   width: 200px;
