@@ -192,18 +192,11 @@ main {
 .projects {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px; }
-  .projects img {
-    width: 200px;
-    height: 200px;
-    border: 2px #eece1a solid; }
-    .projects img:hover {
-      opacity: 0.6;
-      border-color: #eece1a;
-      transition: all 0.6s ease-out; }
+  grid-gap: 20px;
+  grid-auto-rows: 200px; }
   .projects .item {
     background: #515151;
-    padding: 5px;
+    padding: 7px;
     border-radius: 7px;
     border-bottom: #eece1a 3px solid; }
 
@@ -211,7 +204,7 @@ main {
   display: block;
   padding: 0.5rem 1rem;
   border: 0;
-  margin-bottom: 0.3rem; }
+  margin-bottom: 0.2rem; }
   .btn:hover, .btn-dark:hover, .btn-light:hover {
     background: #eece1a;
     color: #000;

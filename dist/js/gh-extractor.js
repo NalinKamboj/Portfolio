@@ -19,10 +19,18 @@ loadPage("GET", "js/repos.html", false) //Real link - https://github.com/NalinKa
   .then(function(data) {
     addRepos(data);
   })
+  .then(function(data) {
+    resizeAllGridItems();
+  })
   .catch(function(err) {
     console.error("Some error occurred.", err.statusText);
   });
 
+/**
+ *
+ * @param {HTMLDoc} [doc] HTML Document for the user's GitHub webpage
+ * @returns {JSON} Name, Description and URL of the user's GitHub repositories.
+ */
 function getRepoDetails(doc) {
   const repos = doc.getElementById("user-repositories-list");
   var repoInfo = [];
@@ -57,7 +65,7 @@ function getRepoDetails(doc) {
   var repoDescList = [];
   var details = repos.getElementsByTagName("p");
   for (let index = 0; index < details.length; index++) {
-    const desc = details[index];
+    // const desc = details[index];
     repoInfo[index].description = details[index].textContent.trim();
   }
 
@@ -70,6 +78,12 @@ function getRepoDetails(doc) {
 }
 
 //Function for adding GH data to the actual portfolio page
+/**
+ *
+ * @param {Array[JSON]} [data] GitHub repositories' info.
+ *
+ * @description Function for adding Repositories' data to the webpage.
+ */
 function addRepos(data) {
   if (debugMode) {
     console.log("[INFO] Inside addRepos()");
@@ -92,7 +106,7 @@ function addRepos(data) {
     // <i class="fab fa-github"></i> Github
     // </a>
     projectLink = document.createElement("a");
-    projectLink.setAttribute("class", "btn-dark mid");
+    projectLink.setAttribute("class", "btn-dark top bottom");
     projectLink.setAttribute("href", data[index].link);
 
     githubIcon = document.createElement("i");
@@ -105,6 +119,50 @@ function addRepos(data) {
     projectItem.appendChild(projectLink);
 
     projects.appendChild(projectItem);
+  }
+
+  if (debugMode) {
+    console.log("[INFO] Repos addition complete!");
+  }
+}
+
+/**
+ *
+ * @param {*} [item] Item to be resized in the grid
+ *
+ * Resized grid items individually.
+ */
+function resizeGrid(item) {
+  grid = document.getElementsByClassName("projects")[0];
+  rowHeight = parseInt(
+    window.getComputedStyle(grid).getPropertyValue("grid-auto-rows")
+  );
+  rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue("grid-gap"));
+
+  if (debugMode) {
+    console.log("[INFO] Resizer - ");
+    console.log("\tRow Height - " + rowHeight + ", Gap - " + rowGap);
+  }
+  console.log("\tReal Height - " + item.getBoundingClientRect().height);
+  rowSpan = Math.ceil(
+    (item.getBoundingClientRect().height + rowGap) / (rowHeight + rowGap)
+  );
+
+  if (debugMode) {
+    console.log("\tRow Span - " + rowSpan);
+  }
+  item.style.gridRowEnd = "span " + rowSpan;
+}
+
+//TODO Extend this function and make it portable
+function resizeAllGridItems() {
+  allItems = document.getElementsByClassName("item");
+  if (debugMode) {
+    console.log("[INFO] Grid Items - ");
+    console.log(allItems);
+  }
+  for (x = 0; x < allItems.length; x++) {
+    resizeGrid(allItems[x]);
   }
 }
 

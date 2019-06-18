@@ -117,24 +117,28 @@ main {
 .projects {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  // grid-template-columns: repeat(auto-fill, minmax(250px,1fr));     //Cool way of doing the above as well!
   grid-gap: 20px;
-  img {
-    width: 200px;
-    height: 200px;
-    border: 2px $secondary-color solid;
-    // align-self: center;
-    &:hover {
-      opacity: 0.6;
-      border-color: $secondary-color;
-      @include easeOut;
-    }
-  }
+  grid-auto-rows: 200px;
+  // Image styling not needed (for now)
+  // img {
+  //   width: 200px;
+  //   height: 200px;
+  //   border: 2px $secondary-color solid;
+  //   // align-self: center;
+  //   &:hover {
+  //     opacity: 0.6;
+  //     border-color: $secondary-color;
+  //     @include easeOut;
+  //   }
+  // }
   // background: $primary-light;
   .item {
     background: lighten($primary-color, 5);
-    padding: 5px;
+    padding: 7px;
     border-radius: 7px;
     border-bottom: $secondary-color 3px solid;
+    // position: relative;
   }
 }
 
@@ -143,7 +147,7 @@ main {
   display: block;
   padding: 0.5rem 1rem;
   border: 0;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
   &:hover {
     background: $secondary-color;
     color: setTextColor($secondary-color);
@@ -160,13 +164,13 @@ main {
   &.bottom {
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
+    // position: relative;
   }
 
   &.top {
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
   }
-
   //Use "top bottom" for middle level button. TODO - Improve this.
 }
 
