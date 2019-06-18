@@ -1,5 +1,6 @@
 function getGithubPage(url) {}
 var debugMode = true;
+var repoDetails;
 loadPage("GET", "js/repos.html", false) //Real link - https://github.com/NalinKamboj?tab=repositories
   .then(function(response) {
     if (debugMode) {
@@ -14,6 +15,7 @@ loadPage("GET", "js/repos.html", false) //Real link - https://github.com/NalinKa
   })
   .then(function(doc) {
     var repoDetails = getRepoDetails(doc);
+    window.repoDetails = repoDetails;
     return repoDetails;
   })
   .then(function(data) {
@@ -34,7 +36,11 @@ loadPage("GET", "js/repos.html", false) //Real link - https://github.com/NalinKa
 function getRepoDetails(doc) {
   const repos = doc.getElementById("user-repositories-list");
   var repoInfo = [];
-  var projectDiv = document.getElementsByClassName("projects")[0];
+  // var projectDiv = document.getElementsByClassName("projects")[0];
+
+  //RegEx for checking View URLs inside the repo description
+  var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+
   if (debugMode) {
     console.log("[INFO] Repositories list - ");
     console.log(repos);
@@ -47,7 +53,7 @@ function getRepoDetails(doc) {
     // repoLinkList.push(linkItem.href);
     var info = {};
     info["link"] = linkItem.href;
-    info["name"] = item.textContent.trim(); //TODO Format result
+    info["name"] = item.textContent.trim().replace(/-/g, " "); //TODO Format result
     repoInfo.push(info);
 
     //Card loader placeholder element
@@ -67,6 +73,19 @@ function getRepoDetails(doc) {
   for (let index = 0; index < details.length; index++) {
     // const desc = details[index];
     repoInfo[index].description = details[index].textContent.trim();
+
+    var urlRegex = new RegExp(expression);
+    var linkMatch = urlRegex.exec(repoInfo[index].description);
+
+    repoInfo[index].description = details[index].textContent
+      .replace(expression, "")
+      .trim();
+
+    if (linkMatch != null) {
+      repoInfo[index].viewLink = linkMatch[0];
+    } else {
+      repoInfo[index].viewLink = null;
+    }
   }
 
   if (debugMode) {
@@ -88,7 +107,6 @@ function addRepos(data) {
   if (debugMode) {
     console.log("[INFO] Inside addRepos()");
   }
-
   var projects = document.getElementsByClassName("projects")[0];
 
   for (let index = 0; index < data.length; index++) {
@@ -96,7 +114,6 @@ function addRepos(data) {
     projectItem.setAttribute("class", "item");
 
     projectHeading = document.createElement("h3");
-    // projectHeading.setAttribute("class", "text-secondary");
     projectHeading.textContent = data[index].name;
 
     projectDesc = document.createElement("p");
@@ -108,16 +125,41 @@ function addRepos(data) {
     projectLink = document.createElement("a");
     projectLink.setAttribute("class", "btn-dark top bottom");
     projectLink.setAttribute("href", data[index].link);
-
     githubIcon = document.createElement("i");
     githubIcon.setAttribute("class", "fab fa-github");
     projectLink.appendChild(githubIcon);
-    // projectLink.textContent = "Github";
 
+    //Add Heading and Description to the page...
     projectItem.appendChild(projectHeading);
     projectItem.appendChild(projectDesc);
+
+    if (data[index].viewLink != null) {
+      viewLink = document.createElement("a");
+      viewLink.setAttribute("class", "btn-light top");
+      viewLink.setAttribute("href", data[index].viewLink);
+
+      viewIcon = document.createElement("i");
+      viewIcon.setAttribute("class", "fas fa-eye");
+      viewLink.appendChild(viewIcon);
+      viewButtonText = document.createElement("p");
+      viewButtonText.textContent = " View Project";
+      viewButtonText.setAttribute("style", "display:inline");
+      viewLink.appendChild(viewButtonText);
+
+      //Reformat GitHub button...
+      projectLink.setAttribute("class", "btn-dark bottom");
+      //Add View Button
+      projectItem.appendChild(viewLink);
+    }
+
+    //Finally, add GitHub button
+    projectButtonText = document.createElement("p");
+    projectButtonText.textContent = " GitHub";
+    projectButtonText.setAttribute("style", "display:inline");
+    projectLink.appendChild(projectButtonText);
     projectItem.appendChild(projectLink);
 
+    //Add the view to the page...
     projects.appendChild(projectItem);
   }
 
@@ -143,10 +185,9 @@ function resizeGrid(item) {
     console.log("[INFO] Resizer - ");
     console.log(item);
     console.log("\tRow Height - " + rowHeight + ", Gap - " + rowGap);
+    console.log("\tReal Height - " + item.scrollHeight);
   }
-  console.log("\tReal Height - " + item.scrollHeight);
   var value = (item.scrollHeight + rowGap + 2) / (rowHeight + rowGap);
-  console.log("\t FLOAT VAL - " + value);
   rowSpan = Math.ceil(value);
 
   if (debugMode) {
@@ -195,3 +236,19 @@ function loadPage(method, url, useproxy = false) {
     xhr.send();
   });
 }
+
+//TODO Pls fix
+window.addEventListener("resize", function(event) {
+  if (debugMode) {
+    console.log("[INFO] Window Resized!");
+    console.log(
+      document.body.clientWidth +
+        " wide by " +
+        document.body.clientHeight +
+        " high"
+    );
+  }
+  // resizeAllGridItems();
+  // addRepos(repoDetails);
+  // resizeAllGridItems();
+});
