@@ -177,7 +177,8 @@ main {
 
 .btn-light {
   @extend .btn;
-  background: lighten($primary-color, 20);
+  background: $primary-green;
+  // background: lighten($primary-color, 20);
   // padding: 0.5rem 0rem;
   margin-bottom: 0.1rem;
   color: setTextColor($primary-color);
