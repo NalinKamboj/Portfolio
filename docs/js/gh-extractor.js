@@ -55,11 +55,6 @@ function getRepoDetails(doc) {
     info["link"] = linkItem.href;
     info["name"] = item.textContent.trim().replace(/-/g, " "); //TODO Format result
     repoInfo.push(info);
-
-    //Card loader placeholder element
-    // loader = document.createElement("div");
-    // loader.setAttribute("class", "project card-loader");
-    // projectDiv.appendChild(loader);
   }
 
   if (debugMode) {
